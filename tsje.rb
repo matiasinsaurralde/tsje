@@ -31,6 +31,9 @@ module TSJE
     result.store( :zona, document.css('.row-fluid .span6')[5].inner_text().downcase.capitalize )
     result.store( :local, document.css('.row-fluid .span6')[7].inner_text().strip() )
 
-    p result
+    coordenadas = raw_html.match(/LatLng\((.*), (.*)\)/)
+    result.store( :coordenadas, [ coordenadas[1].to_f, coordenadas[2].to_f ] )
+
+    return result    
   end
 end
